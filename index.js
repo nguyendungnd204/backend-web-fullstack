@@ -6,15 +6,19 @@ const app = express();
 const cookieParser = require("cookie-parser");
 
 const authRoute = require("./routes/authRoute");
+const postRoute = require("./routes/postRoute");
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: `${process.env.CLIENT_URL}`,
+    credentials: true
+}));
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 
 app.use('/auth', authRoute);
-
+app.use('/post', postRoute);
 
 app.get('/', (req, res) => {
     res.json({

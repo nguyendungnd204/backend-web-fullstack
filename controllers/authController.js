@@ -9,7 +9,7 @@ exports.signup = async (req, res, next) => {
         const {error} = signupSchema.validate({email, password});
 
         if(error){
-            throw new AppError(error.details[0].message, 401);
+            throw new AppError(error.details[0].message, 400);
         }
 
         const result = await authService.signup(email, password);
@@ -32,7 +32,7 @@ exports.signin = async (req, res, next) => {
         const {error} = signupSchema.validate({email, password});
 
         if(error){
-            throw new AppError(error.details[0].message, 401);
+            throw new AppError(error.details[0].message, 400);
         }
 
         const user = await authService.signin(email, password);
